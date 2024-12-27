@@ -1,0 +1,50 @@
+# Najlepsze praktyki optymalizacji wydajności metod w C#
+
+Optymalizacja wydajności metod w C# obejmuje kilka najlepszych praktyk. Oto kluczowe strategie:
+
+1. **Unikaj niepotrzebnych alokacji**:
+   - Minimalizuj użycie alokacji na stercie, używając typów wartościowych (struct) tam, gdzie to odpowiednie.
+   - Używaj `Span<T>` i `Memory<T>` do pracy z fragmentami tablic i ciągów znaków bez alokacji.
+
+2. **Używaj efektywnych struktur danych**:
+   - Wybieraj odpowiednie struktury danych do swoich potrzeb (np. `List<T>` vs. `LinkedList<T>`, `Dictionary<TKey, TValue>` do szybkiego wyszukiwania).
+   - Unikaj używania `ArrayList` i innych kolekcji niegenerycznych.
+
+3. **Minimalizuj boxing i unboxing**:
+   - Unikaj boxing typów wartościowych, używając metod i kolekcji generycznych.
+   - Bądź ostrożny z typami `object` i `dynamic`.
+
+4. **Optymalizuj pętle**:
+   - Używaj pętli `for` zamiast `foreach` podczas iteracji po tablicach i listach, aby uniknąć narzutu związanego z enumeratorem.
+   - Unikaj złożonych wyrażeń wewnątrz warunków pętli.
+
+5. **Używaj StringBuilder do manipulacji ciągami znaków**:
+   - Używaj `StringBuilder` do konkatenacji wielu ciągów znaków, aby uniknąć tworzenia wielu pośrednich instancji ciągów znaków.
+
+6. **Wykorzystuj programowanie asynchroniczne**:
+   - Używaj `async` i `await` do operacji związanych z I/O, aby uniknąć blokowania wątków.
+   - Używaj `Task.Run` do operacji obciążających CPU, aby przenieść pracę na wątki w tle.
+
+7. **Profiluj i benchmarkuj**:
+   - Używaj narzędzi do profilowania, aby zidentyfikować wąskie gardła wydajności.
+   - Używaj BenchmarkDotNet do mierzenia i porównywania wydajności różnych implementacji.
+
+8. **Unikaj niepotrzebnych blokad**:
+   - Minimalizuj użycie blokad w kodzie wielowątkowym, aby uniknąć zatorów i zakleszczeń.
+   - Używaj kolekcji `Concurrent` do operacji bezpiecznych dla wątków bez jawnego blokowania.
+
+9. **Używaj pamięci podręcznej**:
+   - Buforuj wyniki kosztownych obliczeń, jeśli są potrzebne wielokrotnie.
+   - Używaj `MemoryCache` lub `IMemoryCache` do buforowania w pamięci.
+
+10. **Optymalizuj zapytania LINQ**:
+    - Bądź świadomy wpływu wydajności zapytań LINQ, zwłaszcza przy dużych kolekcjach.
+    - Używaj `ToList` lub `ToArray`, aby materializować zapytania, jeśli musisz iterować wielokrotnie.
+
+11. **Unikaj refleksji**:
+    - Refleksja jest wolna i powinna być unikana w kodzie krytycznym dla wydajności.
+    - Używaj wyrażeń skompilowanych lub generatorów kodu, jeśli potrzebujesz dynamicznego zachowania.
+
+12. **Używaj ValueTask do krytycznego kodu asynchronicznego**:
+    - Używaj `ValueTask` zamiast `Task` do krytycznych metod asynchronicznych, które często są synchroniczne.
+
