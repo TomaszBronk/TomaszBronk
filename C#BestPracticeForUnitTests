@@ -1,0 +1,43 @@
+# Najlepsze praktyki organizowania testów jednostkowych w projekcie C#
+
+Organizowanie testów jednostkowych w projekcie C# w sposób efektywny jest kluczowe dla utrzymania czystego, zrozumiałego i skalowalnego kodu. Oto kilka najlepszych praktyk:
+
+1. **Oddzielne projekty testowe**:
+   - Utwórz oddzielny projekt testowy dla swoich testów jednostkowych. Utrzymuje to kod testowy oddzielony od kodu produkcyjnego i ułatwia zarządzanie zależnościami.
+   - Nazwij projekt testowy w sposób jasny, na przykład `MyProject.Tests`.
+
+2. **Odwzorowanie struktury projektu**:
+   - Organizuj pliki testowe, aby odzwierciedlały strukturę głównego projektu. Na przykład, jeśli masz folder `Services` w głównym projekcie, utwórz odpowiadający mu folder `Services` w projekcie testowym.
+   - Ułatwia to znalezienie i zarządzanie testami związanymi z konkretnymi częściami aplikacji.
+
+3. **Używaj opisowych nazw**:
+   - Nazwij swoje klasy testowe i metody w sposób opisowy, aby wskazywały, co testują. Na przykład `UserServiceTests` dla klasy testującej `UserService`.
+   - Używaj nazw metod, które opisują testowane zachowanie, na przykład `CreateUser_ShouldReturnSuccess_WhenValidInput`.
+
+4. **Grupuj powiązane testy**:
+   - Grupuj powiązane testy w tej samej klasie. Na przykład, wszystkie testy dla `UserService` powinny być w `UserServiceTests`.
+   - Używaj regionów lub komentarzy, aby oddzielić różne grupy testów w klasie, jeśli to konieczne.
+
+5. **Używaj kategorii testów**:
+   - Używaj atrybutów takich jak `[Trait]` w xUnit do kategoryzowania testów. Pozwala to na filtrowanie i uruchamianie określonych kategorii testów.
+   - Na przykład, możesz kategoryzować testy jako `[Trait("Category", "Unit")]` lub `[Trait("Category", "Integration")]`.
+
+6. **Utrzymuj testy małe i skoncentrowane**:
+   - Każdy test powinien koncentrować się na jednym zachowaniu lub aspekcie testowanej metody. Ułatwia to zrozumienie i utrzymanie testów.
+   - Unikaj testowania wielu zachowań w jednej metodzie testowej.
+
+7. **Używaj metod setup i teardown**:
+   - Używaj metod setup (`[SetUp]` w NUnit, `[TestInitialize]` w MSTest) i teardown (`[TearDown]` w NUnit, `[TestCleanup]` w MSTest) do inicjalizacji i czyszczenia wszelkich współdzielonych zasobów.
+   - Zapewnia to, że każdy test jest uruchamiany w czystym środowisku.
+
+8. **Mockuj zewnętrzne zależności**:
+   - Używaj frameworków do mockowania, takich jak Moq, aby mockować zewnętrzne zależności. Izoluje to jednostkę testowaną i zapewnia, że testy nie są wpływane przez czynniki zewnętrzne.
+   - Unikaj używania rzeczywistych baz danych, systemów plików lub zasobów sieciowych w testach jednostkowych.
+
+9. **Używaj testów parametryzowanych**:
+   - Używaj testów parametryzowanych, aby uruchamiać tę samą logikę testową z różnymi danymi wejściowymi. Redukuje to duplikację kodu i sprawia, że testy są bardziej kompleksowe.
+   - W xUnit używaj `[Theory]` i `[InlineData]` do testów parametryzowanych.
+
+10. **Dokumentuj testy**:
+    - Dodawaj komentarze lub dokumentację, aby wyjaśnić cel złożonych testów. Pomaga to innym zrozumieć intencję testów.
+    - Używaj komentarzy XML do publicznych metod testowych, jeśli to konieczne.
