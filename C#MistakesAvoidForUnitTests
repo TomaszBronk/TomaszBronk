@@ -1,0 +1,39 @@
+# Najczęstsze błędy do unikania podczas pisania testów jednostkowych w C#
+
+Podczas pisania testów jednostkowych w C# istnieje kilka powszechnych błędów, których należy unikać, aby zapewnić skuteczność i łatwość utrzymania testów. Oto kilka kluczowych punktów do zapamiętania:
+
+1. **Brak izolacji testów**:
+   - Upewnij się, że każdy test jest niezależny i nie polega na stanie lub wyniku innych testów. Używaj metod setup i teardown do inicjalizacji i czyszczenia wszelkich współdzielonych zasobów.
+
+2. **Testowanie zbyt wielu rzeczy naraz**:
+   - Skup się na testowaniu jednej rzeczy naraz. Każdy test powinien weryfikować jedno zachowanie lub aspekt testowanej metody. Ułatwia to identyfikację przyczyny awarii.
+
+3. **Ignorowanie przypadków brzegowych**:
+   - Uwzględnij testy dla przypadków brzegowych, takich jak puste ciągi, wartości null i warunki graniczne. Te przypadki często ujawniają błędy, które nie są widoczne w typowych scenariuszach.
+
+4. **Nieskuteczne używanie asercji**:
+   - Używaj asercji do weryfikacji oczekiwanego wyniku testów. Upewnij się, że twoje asercje są konkretne i znaczące. Unikaj używania wielu asercji w jednym teście, jeśli nie są one powiązane.
+
+5. **Nadmierne używanie mocków i stubów**:
+   - Chociaż mocki i stuby są przydatne do izolowania zależności, nadmierne ich używanie może sprawić, że testy będą kruche i trudne do utrzymania. Używaj ich z rozwagą i preferuj rzeczywiste obiekty, gdy to możliwe.
+
+6. **Brak testowania wyjątków**:
+   - Upewnij się, że testujesz oczekiwane wyjątki, używając konstrukcji takich jak `Assert.Throws` lub `Assert.ThrowsAsync`. To weryfikuje, że twój kod poprawnie obsługuje warunki błędów.
+
+7. **Hardcoding danych testowych**:
+   - Unikaj hardcodowania danych testowych bezpośrednio w testach. Używaj testów parametryzowanych (np. `[Theory]` i `[InlineData]` w xUnit), aby dostarczać różne dane wejściowe i oczekiwane wyniki.
+
+8. **Ignorowanie czytelności testów**:
+   - Pisz testy, które są łatwe do odczytania i zrozumienia. Używaj opisowych nazw metod testowych i zmiennych. Ułatwia to innym (i tobie w przyszłości) zrozumienie celu testu.
+
+9. **Nierozpowszechnianie testów często**:
+   - Uruchamiaj testy często podczas rozwoju, aby wcześnie wykrywać problemy. Zintegruj testy z procesem budowania i używaj ciągłej integracji (CI) do automatycznego uruchamiania testów.
+
+10. **Zaniedbywanie pokrycia kodu**:
+    - Chociaż pokrycie kodu nie jest jedyną miarą jakości testów, ważne jest, aby krytyczne ścieżki i przypadki brzegowe były pokryte. Używaj narzędzi do pokrycia kodu, aby zidentyfikować nieprzetestowany kod.
+
+11. **Brak czyszczenia po testach**:
+    - Upewnij się, że testy czyszczą wszelkie zasoby, które używają, takie jak pliki, połączenia z bazą danych lub gniazda sieciowe. Zapobiega to wzajemnemu wpływowi testów i zapewnia czyste środowisko testowe.
+
+12. **Testowanie szczegółów implementacji**:
+    - Skup się na testowaniu zachowania i wyników twojego kodu, a nie jego szczegółów implementacji. To sprawia, że twoje testy są bardziej odporne na zmiany w kodzie.
